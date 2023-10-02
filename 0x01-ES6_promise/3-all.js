@@ -3,7 +3,7 @@ import { uploadPhoto, createUser } from './utils';
 export default function handleProfileSignup() {
   let body;
 
-  uploadPhoto()
+  return uploadPhoto()
     .then((value) => {
       body = value.body;
     })
