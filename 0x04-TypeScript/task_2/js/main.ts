@@ -22,17 +22,20 @@ class Teacher implements TeacherInterface {
       workTeacherTasks = (): string => "Getting to work";
 }
 
-const createEmployee = (salary: number | string): Director | Teacher => {
+const createEmployee = (salary: number | string): DirectorInterface | TeacherInterface => {
       if ((typeof salary === "number") && (salary < 500)){
       	 return new Teacher();
       }
       return new Director();
 }
 
+const isDirector = (employee: DirectorInterface | TeacherInterface): employee is Director => {
+      return 'workDirectorTasks' in employee
+}
 
-console.log(createEmployee(200));
-Teacher
-console.log(createEmployee(1000));
-Director
-console.log(createEmployee('$500'));
-Director
+const executeWork = (employee: DirectorInterface | TeacherInterface): string => {
+      if (isDirector(employee)) {
+      	return employee.workDirectorTasks();
+      } 
+      return employee.workTeacherTasks();
+}
