@@ -20,10 +20,10 @@ const countStudents = (path) => {
     console.log(`Number of students in CS: ${cs.length}. List: ${cs.join(', ')}`);
     console.log(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
   } catch (err) {
-    if (err === 'ENOENT') {
+    if (err.code === 'ENOENT') {
       throw new Error('Cannot load the database');
     }
-    throw new Error(err);
+    throw err;
   }
 };
 
