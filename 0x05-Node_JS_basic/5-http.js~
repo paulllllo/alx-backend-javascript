@@ -1,0 +1,41 @@
+const http = require('http');
+const fs = require('fs').promises;
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+const hostname = '127.0.0.1';
+const port = 1245;
+let database = "This is the list of our students\n";
+const app = http.createServer((req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+    switch (req.url) {
+    case "/":
+	res.writeHead(200);
+	res.end("Hello Holberton School!");
+	break
+    case "/students":
+	res.writeHead(200);
+	res.end(database);
+    }
+});
+
+exec(`node -e "const countStudents = require('./3-read_file_async'); 
+countStudents('${process.argv[2]}');"`)
+    .then(({stdout, stderr}) => {
+	if (stdout) {
+	    database += stdout;
+	    console.log(stdout);
+	} else {
+	    database += stderr;
+	}
+	app.listen(port, hostname, () => {
+
+	});
+	
+    })
+    .catch((err) => {
+	throw new Error(err);
+    })
+
+
+module.exports = app;
