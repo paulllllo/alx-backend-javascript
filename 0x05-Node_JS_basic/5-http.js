@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs').promises;
+const url = require('url');
 
 const countStudents = (path) => fs.readFile(path, 'utf8')
   .then((data) => {
@@ -29,32 +30,30 @@ const countStudents = (path) => fs.readFile(path, 'utf8')
     throw err;
   });
 
-const hostname = '127.0.0.1';
 const port = 1245;
-let database = 'This is the list of our students\n';
+let database = '';
 const app = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
-  switch (req.url) {
+  const reqUrl = url.parse(req.url).pathname;
+  switch (reqUrl) {
     case '/':
       res.writeHead(200);
       res.end('Hello Holberton School!');
       break;
     case '/students':
       res.writeHead(200);
+      res.write('This is the list of our students\n');
       res.end(database);
       break;
     default:
       throw new Error();
-  }
+  };
 });
-
-// exec(`node -e "const countStudents = require('./3-read_file_async');
-// countStudents('${process.argv[2]}');"`)
 
 countStudents(`${__dirname}/${process.argv[2]}`)
   .then((output) => {
     database += output.join('\n');
-    app.listen(port, hostname, () => {
+    app.listen(port, () => {
 
     });
   })
