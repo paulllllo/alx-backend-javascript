@@ -47,7 +47,7 @@ const app = http.createServer((req, res) => {
       break;
     default:
       throw new Error();
-  };
+  }
 });
 
 countStudents(`${__dirname}/${process.argv[2]}`)
@@ -58,7 +58,9 @@ countStudents(`${__dirname}/${process.argv[2]}`)
     });
   })
   .catch((err) => {
-    console.log(err);
+    database += (err.message);
+    app.listen(port, () => {
+    });
   });
 
 module.exports = app;
