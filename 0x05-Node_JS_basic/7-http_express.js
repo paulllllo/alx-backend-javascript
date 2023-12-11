@@ -1,8 +1,7 @@
-const http = require('http');
-const fs = require('fs').promises;
-const url = require('url');
+const fs = require('fs');
 const express = require('express');
-const app = express()
+
+const app = express();
 
 const countStudents = (path) => fs.readFile(path, 'utf8')
   .then((data) => {
@@ -35,14 +34,14 @@ const countStudents = (path) => fs.readFile(path, 'utf8')
 const port = 1245;
 let database = '';
 app.get('/', (req, res) => {
-      res.writeHead(200);
-      res.end('Hello Holberton School!');
+  res.writeHead(200);
+  res.end('Hello Holberton School!');
 });
 
 app.get('/students', (req, res) => {
-    res.writeHead(200);
-    res.write('This is the list of our students\n');
-    res.end(database);
+  res.writeHead(200);
+  res.write('This is the list of our students\n');
+  res.end(database);
 });
 
 countStudents(`${__dirname}/${process.argv[2]}`)
