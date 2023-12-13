@@ -15,9 +15,7 @@ export class StudentsController {
 		res.end()
 	    })
 	    .catch((err) => {
-		if (err.code === 'ENOENT') {
-		    res.status(500).end('Cannot load the database');
-		}
+		res.status(500).end(err.message);
 	    });
     }
 
@@ -34,9 +32,7 @@ export class StudentsController {
 		res.end();
             })
             .catch((err) => {
-                if (err.code === 'ENOENT') {
-                    res.status(500).end('Cannot load the database');
-                }
+                res.status(500).end(err.message);
             });
     }
 }

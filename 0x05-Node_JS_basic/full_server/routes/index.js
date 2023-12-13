@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/students", (req, res) => {
-    console.log("Inside routes.js get /students route before controller", new Date());
     StudentsController.getAllStudents(req, res);
 });
 
