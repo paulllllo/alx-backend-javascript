@@ -1,0 +1,30 @@
+const fs = require('fs').promises
+
+const readDatabase = (path) => {
+    return fs.readFile(path, 'utf8')
+	.then((data) => {
+	    const dataLines = data.split('\n');
+	    const CS = [];
+	    const SWE = [];
+	    const output = [];
+	    for (let i = 1; i < dataLines.length; i += 1) {
+		const row = dataLines[i].split(',');
+		if (row.length === 4) {
+		    if (row[3] === 'CS') {
+			CS.push(row[0]);
+		    } else if (row[3] === 'SWE') {
+			SWE.push(row[0]);
+		    }
+		}
+	    }
+	    return {CS, SWE};
+	})
+	.catch((err) => {
+	    if (err.code === 'ENOENT') {
+		throw new Error('Cannot load the database');
+	    }
+	    throw err;
+	});
+};
+
+module.exports = readDatabase;
