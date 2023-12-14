@@ -1,5 +1,5 @@
-export class AppController {
-    static getHomepage(req, res) {
-	res.status(200).end('Hello Holberton School!');
-    }
+export default class AppController {
+  static getHomepage(req, res) {
+    res.status(200).end('Hello Holberton School!');
+  }
 }

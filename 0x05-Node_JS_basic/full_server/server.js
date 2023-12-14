@@ -4,10 +4,10 @@ const mainRoutes = require('./routes/index');
 const app = express();
 const PORT = 1245;
 
-app.use("/", mainRoutes)
+app.use('/', mainRoutes);
 
 app.listen(PORT, () => {
-    console.log('Server is running');
+  console.log('Server is running');
 });
 
 export default app;
