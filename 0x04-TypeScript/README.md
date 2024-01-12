@@ -1,1 +1,2 @@
-A dir created for ALX SE project Typescript
+## TypeScript
+TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.
